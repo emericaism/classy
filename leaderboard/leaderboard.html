@@ -1,0 +1,117 @@
+<head>
+  <title>Classy</title>
+</head>
+
+<body>
+  <div id="slider"></div>
+  <div> 
+    {{> welcome}}
+  </div>
+</body>
+
+<template name="welcome">
+  <div>Welcome!</div>
+  {{#unless selected_class}}
+    <div>Select a class, bitch.</div>
+    {{#each classes}}
+      {{> class}}
+    {{/each}}
+    <div>
+    {{> new_class}}
+    </div>
+  {{/unless}}
+  {{#if selected_class}}
+    <div>This is the classroom for {{my_class.number}} - {{my_class.name}}.  Take a seat, bitch. </div>
+    <div>
+      {{> confusion}}
+    </div>
+    <div>
+      {{> questionboard}}
+    </div>
+    <div>
+      {{> question_submit}}
+    </div>
+    <div>
+      {{> back}}
+    </div>
+  {{/if}}
+</template>
+
+<template name="confusion">
+  <div>
+  <input class="dec" type="button" value="<">
+  Your confusion: <span class="level">{{level}}</span>
+  <input class="inc" type="button" value=">">
+  <div>
+    Class confusion: <span>{{tot_confusion}}</span>
+    Number of students: <span>{{nstudents}}</span>
+  </div>
+  </div>
+</template>
+
+<template name="new_class">
+  <div>
+  Create a new class: <input id="class_name" type="text" size="10" value="New Class Name"> 
+  <input class="new_class" type="button" value="Go!">
+  </div>
+  <span>Debug: {{debug}} </span>
+</template>
+
+<template name="class">
+  <div class="class">
+    <span class="number">{{number}}</span> - 
+    <span class="class_name">{{name}}</span>
+  </div>
+</template>
+
+<template name="questionboard">
+  <div>
+    {{#each questions}}
+      {{> question}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="question">
+  <div class="question">
+    <span class="content">{{content}}</span> : 
+    <span class="score">{{score}}</span>
+  </div>
+</template>
+
+<template name="question_submit">
+  <div>Submit a question, bitch.</div>
+  <input id="new_question" type="text" size=100>
+  <input class="submit" type="button" value="Submit this shit">
+</template>
+
+<template name="leaderboard">
+  <div class="leaderboard">
+    {{#each players}}
+      {{> player}}
+    {{/each}}
+  </div>
+
+  {{#if selected_name}}
+  <div class="details">
+    <div class="name">{{selected_name}}</div>
+    <input type="button" class="inc" value="Give 10 points" />
+  </div>
+  {{/if}}
+
+  {{#unless selected_name}}
+  <div class="none">Click a player to select</div>
+  {{/unless}}
+</template>
+
+<template name="player">
+  <div class="player {{selected}}">
+    <span class="name">{{userID}}</span>
+    <!--<span class="score">{{score}}</span>-->
+  </div>
+</template>
+
+<template name="back">
+  <span class="go_back">Exit classroom.</span>
+</template>
+
